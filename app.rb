@@ -23,6 +23,7 @@ post '/push' do
       end
       message = message.dig(s)
     end
+    message.gsub("\n","<br>")
   end
 
   return 500 unless message
@@ -30,9 +31,7 @@ post '/push' do
   uri = URI(bc)
   res = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
     req = Net::HTTP::Post.new(uri)
-    req['Content-Type'] = 'application/json'
-    # The body needs to be a JSON string, use whatever you know to parse Hash to JSON
-    req.body = {content: message}.to_json
+    req.body = "content='#{content}'"
     http.request(req)
   end
 
