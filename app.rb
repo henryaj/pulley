@@ -20,7 +20,6 @@ post '/push' do
     selectors.each do |s|
       if message.is_a?(Array)
         message = message.first
-        next
       end
       message = message.dig(s)
     end
