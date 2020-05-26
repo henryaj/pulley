@@ -26,6 +26,8 @@ post '/push' do
     req.body = {content: message}.to_json
     http.request(req)
   end
+
+  halt 200
 end
 
 
