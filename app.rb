@@ -4,6 +4,10 @@ require 'json'
 
 configure { set :server, :puma }
 
+get '/' do
+  '<html><body><center><h1>Pulley</h1></center></body></html>'
+end
+
 post '/push' do
   bc = params[:bc] # bc webhook url
   selector = params[:selector] # json path to field to display
