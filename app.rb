@@ -33,7 +33,7 @@ post '/push' do
   uri = URI(bc)
   res = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
     req = Net::HTTP::Post.new(uri)
-    req.body = "content='#{message}'"
+    req.body = "content=#{message}"
     http.request(req)
   end
 
