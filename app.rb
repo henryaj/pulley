@@ -26,12 +26,14 @@ post '/push' do
     message.gsub("\n","<br>")
   end
 
+  p message
+
   return 500 unless message
 
   uri = URI(bc)
   res = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
     req = Net::HTTP::Post.new(uri)
-    req.body = "content='#{content}'"
+    req.body = "content='#{message}'"
     http.request(req)
   end
 
