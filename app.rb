@@ -18,9 +18,15 @@ post '/push' do
     selectors = selector.split(".")
     message = payload
     selectors.each do |s|
+      if message.is_a?(Array)
+        message = message.first
+        next
+      end
       message = message.dig(s)
     end
   end
+
+  return 500 unless message
 
   uri = URI(bc)
   res = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
